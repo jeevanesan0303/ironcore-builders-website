@@ -639,25 +639,25 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
       </section>
 
       {/* 5. PROCESS SECTION */}
-      <section id="process" className="py-24 bg-[#050f18] border-b border-white/5 relative">
+      <section id="process" className="py-24 bg-[#f5f2eb] border-b border-black/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 reveal visible">
             <div className="lg:col-span-8 text-left">
               <span className="text-gold text-xs font-bold uppercase tracking-widest mb-3">Our Process</span>
-              <h2 className="text-3xl sm:text-5xl font-bold uppercase leading-tight font-display tracking-tight text-white">
+              <h2 className="text-3xl sm:text-5xl font-bold uppercase leading-tight font-display tracking-tight text-ink">
                 A Proven Process Delivering Results
               </h2>
             </div>
             <div className="lg:col-span-4 text-left lg:text-right">
-              <p className="text-sm text-gray-400 font-light leading-relaxed max-w-sm">
+              <p className="text-sm text-gray-600 font-light leading-relaxed max-w-sm">
                 Our streamlined process ensures every project is delivered on time, within budget, and to the highest quality standards.
               </p>
             </div>
           </div>
 
           {/* Stepper Timeline Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 border border-white/10 divide-y md:divide-y-0 md:divide-x divide-white/10 reveal visible">
+          <div className="grid grid-cols-1 md:grid-cols-4 border border-black/10 divide-y md:divide-y-0 md:divide-x divide-black/10 reveal visible">
             {[
               {
                 num: '01',
@@ -682,15 +682,15 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
             ].map((step, idx) => (
               <div
                 key={idx}
-                className="p-8 sm:p-10 flex flex-col gap-6 text-left hover:bg-gold hover:text-ink transition-all duration-300 group bg-navy/20"
+                className="p-8 sm:p-10 flex flex-col gap-6 text-left hover:bg-gold hover:text-ink transition-all duration-300 group bg-white"
               >
                 <span className="text-xs font-bold text-gold group-hover:text-ink transition-colors">
                   {step.num}
                 </span>
-                <h3 className="text-2xl font-black uppercase tracking-wide text-white group-hover:text-ink transition-colors font-display">
+                <h3 className="text-2xl font-black uppercase tracking-wide text-ink group-hover:text-ink transition-colors font-display">
                   {step.title}
                 </h3>
-                <p className="text-sm text-gray-400 font-light leading-relaxed group-hover:text-ink/80 transition-colors">
+                <p className="text-sm text-gray-600 font-light leading-relaxed group-hover:text-ink/80 transition-colors">
                   {step.desc}
                 </p>
               </div>
