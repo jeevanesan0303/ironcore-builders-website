@@ -27,9 +27,8 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
   const [typingLength, setTypingLength] = useState(0);
 
   useEffect(() => {
-    const text1 = "BUILDING STRONGER ";
-    const text2 = "TOMORROWS.";
-    const totalLength = text1.length + text2.length;
+    const fullText = "BUILDING STRONGER TOMORROWS.";
+    const totalLength = fullText.length;
 
     let timeoutId;
     let intervalId;
@@ -46,7 +45,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
             startTyping();
           }, 3000);
         }
-      }, 200);
+      }, 150);
     };
 
     startTyping();
@@ -57,10 +56,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
     };
   }, []);
 
-  const text1 = "BUILDING STRONGER ";
-  const text2 = "TOMORROWS.";
-  const showText1 = text1.slice(0, typingLength);
-  const showText2 = typingLength > text1.length ? text2.slice(0, typingLength - text1.length) : "";
+  const fullText = "BUILDING STRONGER TOMORROWS.";
   const [contactData, setContactData] = useState({
     name: '',
     phone: '',
@@ -135,9 +131,20 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
               Trusted Construction Partner
             </span>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase leading-tight font-display tracking-tight text-white mb-6 min-h-[90px] sm:min-h-[140px] lg:min-h-[180px]">
-              {showText1}
-              <span className="text-gold">{showText2}</span>
-              <span className="animate-pulse text-gold font-normal">|</span>
+              {fullText.split("").map((char, index) => {
+                const isGold = index >= 18;
+                const isVisible = index < typingLength;
+                return (
+                  <span
+                    key={index}
+                    className={`transition-opacity duration-500 ease-out ${
+                      isGold ? 'text-gold' : 'text-white'
+                    } ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-light leading-relaxed max-w-2xl mb-8">
               From concept to completion, Iron Core Builders delivers dependable building, road, and heavy-machinery solutions with precision, integrity, and exceptional care.
