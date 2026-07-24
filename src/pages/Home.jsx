@@ -82,9 +82,20 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
   const jcbHighlights = [
     { title: 'Classroom Briefing', image: '094a622b-0ad1-4fba-8b2e-a4b97de4db95.jpg' },
     { title: 'Machine Familiarization', image: '0ef70b2c-793b-4437-b2b1-131cbf55d3f9.jpg' },
+    { title: 'Pre-operation Inspection', image: 'jcb-training-maintenance-2.jpg' },
+    { title: 'Engine Maintenance', image: 'jcb-training-maintenance-1.jpg' },
+    { title: 'Engine Diagnostics', image: 'jcb-training-maintenance-3.jpg' },
+    { title: 'Cabin Control Training', image: 'jcb-training-cab-1.jpg' },
+    { title: 'Operator Guidance', image: 'jcb-training-cab-2.jpg' },
+    { title: 'Hands-on Steer Control', image: 'jcb-training-cab-3.jpg' },
     { title: 'Hands-on Operation', image: '1b0f937e-1d8d-4a72-aa2e-95511b822d38.jpg' },
+    { title: 'Loader Bucket Inspection', image: 'jcb-training-bucket.jpg' },
+    { title: 'Tire & Rim Maintenance', image: 'jcb-training-wheel-maintenance.jpg' },
+    { title: 'Safety Rigging & Ropes', image: 'jcb-training-rigging.jpg' },
+    { title: 'Field Site Overview', image: 'jcb-training-overhead.jpg' },
     { title: 'Live Site Practice', image: '2c4bb512-afb4-4ee8-a004-bf668b46e4f5.jpg' },
-    { title: 'Certification Ceremony', image: '404a845e-1480-4622-b34b-3debe598d678.jpg' }
+    { title: 'Certification Ceremony', image: '404a845e-1480-4622-b34b-3debe598d678.jpg' },
+    { title: 'Successful Graduates', image: 'jcb-main-trainees.jpg' }
   ];
 
   // Filter projects based on selected type
@@ -375,6 +386,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
                 <span className="w-10 h-[1.5px] bg-gold" />
               </span>
               <h2 className="text-3xl sm:text-5xl font-extrabold uppercase leading-tight font-display tracking-tight text-ink mb-6">
+                JCB TRAINING RECENTLY IN INDIA <br />
                 MASTER HEAVY MACHINERY <br />
                 THROUGH <span className="text-gold">REAL FIELD EXPERIENCE.</span>
               </h2>
@@ -438,8 +450,8 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
             <div className="lg:col-span-6 flex flex-col gap-0 reveal">
               <div className="border border-black/10 overflow-hidden bg-white aspect-[16/10] w-full">
                 <img
-                  src="/images/indian-jcb/06e76e56-9444-4923-be8a-ed9db5ae7be2.jpg"
-                  alt="JCB Training Academy trainees"
+                  src="/images/indian-jcb/jcb-main-trainees.jpg"
+                  alt="JCB Training Academy graduates with their luggage"
                   className="w-full h-full object-cover filter saturate-85 hover:scale-102 transition-transform duration-500"
                 />
               </div>
@@ -752,8 +764,8 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
           <div className="lg:col-span-5 reveal visible">
             <div className="border border-white/10 overflow-hidden bg-navy">
               <img
-                src="/images/hero-house.jpg"
-                alt="Premium Building Structure"
+                src="/images/advantage-road.jpg"
+                alt="Road construction and paving team in action"
                 className="w-full h-80 lg:h-[400px] object-cover hover:scale-102 transition-transform duration-500"
               />
             </div>
