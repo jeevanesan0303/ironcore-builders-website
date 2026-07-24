@@ -24,6 +24,43 @@ import {
 export default function Home({ onSelectProject, projects, onOpenQuote }) {
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [typingLength, setTypingLength] = useState(0);
+
+  useEffect(() => {
+    const text1 = "BUILDING STRONGER ";
+    const text2 = "TOMORROWS.";
+    const totalLength = text1.length + text2.length;
+
+    let timeoutId;
+    let intervalId;
+
+    const startTyping = () => {
+      setTypingLength(0);
+      let current = 0;
+      intervalId = setInterval(() => {
+        current += 1;
+        setTypingLength(current);
+        if (current >= totalLength) {
+          clearInterval(intervalId);
+          timeoutId = setTimeout(() => {
+            startTyping();
+          }, 3000);
+        }
+      }, 200);
+    };
+
+    startTyping();
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  const text1 = "BUILDING STRONGER ";
+  const text2 = "TOMORROWS.";
+  const showText1 = text1.slice(0, typingLength);
+  const showText2 = typingLength > text1.length ? text2.slice(0, typingLength - text1.length) : "";
   const [contactData, setContactData] = useState({
     name: '',
     phone: '',
@@ -97,8 +134,10 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
               <span className="w-10 h-[1.5px] bg-gold" />
               Trusted Construction Partner
             </span>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase leading-tight font-display tracking-tight text-white mb-6">
-              Building Stronger <span className="text-gold">Tomorrows.</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase leading-tight font-display tracking-tight text-white mb-6 min-h-[90px] sm:min-h-[140px] lg:min-h-[180px]">
+              {showText1}
+              <span className="text-gold">{showText2}</span>
+              <span className="animate-pulse text-gold font-normal">|</span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-light leading-relaxed max-w-2xl mb-8">
               From concept to completion, Iron Core Builders delivers dependable building, road, and heavy-machinery solutions with precision, integrity, and exceptional care.
@@ -273,68 +312,44 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
 
           {/* Core Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal visible">
-            <div className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
+            <div id="service-building" className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
               <div className="w-12 h-12 rounded-sm bg-gold/10 flex items-center justify-center text-gold mb-6 border border-gold/25">
                 <Building2 size={24} />
               </div>
               <h3 className="text-xl font-bold uppercase tracking-wide text-white mb-3">Building</h3>
-              <p className="text-sm text-gray-400 font-light leading-relaxed mb-6">
+              <p className="text-sm text-gray-400 font-light leading-relaxed">
                 Residential, commercial and industrial building solutions designed with precision, style, and care.
               </p>
-              <button
-                onClick={onOpenQuote}
-                className="mt-auto flex items-center gap-1 text-xs text-gold hover:text-white transition-colors uppercase font-bold tracking-wider"
-              >
-                Learn More <ChevronRight size={14} />
-              </button>
             </div>
 
-            <div className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
+            <div id="service-road-works" className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
               <div className="w-12 h-12 rounded-sm bg-gold/10 flex items-center justify-center text-gold mb-6 border border-gold/25">
                 <Route size={24} />
               </div>
               <h3 className="text-xl font-bold uppercase tracking-wide text-white mb-3">Road Works</h3>
-              <p className="text-sm text-gray-400 font-light leading-relaxed mb-6">
+              <p className="text-sm text-gray-400 font-light leading-relaxed">
                 Construction and maintenance of high-quality highways, primary roads, and supporting drainage infrastructure.
               </p>
-              <button
-                onClick={onOpenQuote}
-                className="mt-auto flex items-center gap-1 text-xs text-gold hover:text-white transition-colors uppercase font-bold tracking-wider"
-              >
-                Learn More <ChevronRight size={14} />
-              </button>
             </div>
 
-            <div className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
+            <div id="service-heavy-machinery" className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
               <div className="w-12 h-12 rounded-sm bg-gold/10 flex items-center justify-center text-gold mb-6 border border-gold/25">
                 <HardHat size={24} />
               </div>
               <h3 className="text-xl font-bold uppercase tracking-wide text-white mb-3">Heavy Machinery</h3>
-              <p className="text-sm text-gray-400 font-light leading-relaxed mb-6">
+              <p className="text-sm text-gray-400 font-light leading-relaxed">
                 Reliable excavation and heavy site support using standard operated JCB loaders and grading mechanisms.
               </p>
-              <button
-                onClick={onOpenQuote}
-                className="mt-auto flex items-center gap-1 text-xs text-gold hover:text-white transition-colors uppercase font-bold tracking-wider"
-              >
-                Learn More <ChevronRight size={14} />
-              </button>
             </div>
 
-            <div className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
+            <div id="service-renovation" className="glass-card p-8 flex flex-col items-start text-left min-h-[300px]">
               <div className="w-12 h-12 rounded-sm bg-gold/10 flex items-center justify-center text-gold mb-6 border border-gold/25">
                 <Wrench size={24} />
               </div>
               <h3 className="text-xl font-bold uppercase tracking-wide text-white mb-3">Renovation</h3>
-              <p className="text-sm text-gray-400 font-light leading-relaxed mb-6">
+              <p className="text-sm text-gray-400 font-light leading-relaxed">
                 Professional renovation and architectural remodeling services to transform and enhance your existing structures.
               </p>
-              <button
-                onClick={onOpenQuote}
-                className="mt-auto flex items-center gap-1 text-xs text-gold hover:text-white transition-colors uppercase font-bold tracking-wider"
-              >
-                Learn More <ChevronRight size={14} />
-              </button>
             </div>
           </div>
         </div>
@@ -743,8 +758,8 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
       <section id="contact" className="py-24 relative overflow-hidden bg-navy">
         {/* Background & Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-cover bg-center filter brightness-[0.45] saturate-[1.1] scale-102 transition-all duration-700" style={{ backgroundImage: "url('/images/contact-road-premium.jpg')" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/80 to-ink/65 z-10" />
+          <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('/images/contact-road-premium.jpg')" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/90 to-ink/80 z-10" />
         </div>
 
         <div className="relative z-20 max-w-7xl mx-auto px-6">
@@ -786,7 +801,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
                 </div>
               </a>
               <a
-                href="https://maps.google.com/?q=Nagarkovil+East,Nagarkovil,Sri+Lanka"
+                href="https://maps.google.com/?q=9.6879,80.3285"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-gold/50 transition-colors rounded-sm group"
@@ -802,7 +817,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
             {/* Column 2: Middle Map */}
             <div className="lg:col-span-2 w-full reveal visible">
               <a
-                href="https://maps.google.com/?q=Nagarkovil+East,Nagarkovil,Sri+Lanka"
+                href="https://maps.google.com/?q=9.6879,80.3285"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block border border-white/15 overflow-hidden group relative h-[340px] w-full rounded-sm"
@@ -810,7 +825,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
               >
                 <iframe
                   title="Iron Core Builders location preview"
-                  src="https://www.google.com/maps?q=Nagarkovil%20East%20Nagarkovil%20Sri%20Lanka&output=embed"
+                  src="https://www.google.com/maps?q=9.6879,80.3285&output=embed"
                   className="w-full h-full border-0 pointer-events-none filter grayscale-[0.8] invert-[0.9] contrast-[0.85] group-hover:grayscale-0 group-hover:invert-0 group-hover:contrast-100 transition-all duration-500"
                   loading="lazy"
                 />

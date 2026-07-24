@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 export default function Navbar({ currentView, setView, activeSection, onOpenQuote }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +51,32 @@ export default function Navbar({ currentView, setView, activeSection, onOpenQuot
     }
   };
 
+  const handleServiceClick = (targetId) => {
+    setIsOpen(false);
+    if (currentView !== 'home') {
+      setView('home');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('active-service-card');
+          setTimeout(() => {
+            el.classList.remove('active-service-card');
+          }, 3000);
+        }
+      }, 150);
+    } else {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('active-service-card');
+        setTimeout(() => {
+          el.classList.remove('active-service-card');
+        }, 3000);
+      }
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-t-4 border-gold ${
@@ -78,6 +105,41 @@ export default function Navbar({ currentView, setView, activeSection, onOpenQuot
               link.isSection
                 ? currentView === 'home' && activeSection === link.target
                 : currentView === link.target;
+
+            if (link.name === 'Services') {
+              return (
+                <div key={link.name} className="relative group py-2">
+                  <button
+                    onClick={() => handleNavClick(link)}
+                    className={`text-sm font-semibold tracking-wider uppercase nav-link-underline hover:text-gold transition-colors duration-300 focus:outline-none flex items-center gap-1.5 ${
+                      isLinkActive ? 'text-gold active' : 'text-gray-300'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300 text-gray-400 group-hover:text-gold" />
+                  </button>
+                  {/* Dropdown Menu */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-ink/95 border border-white/10 border-t-gold rounded-sm shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 backdrop-blur-md">
+                    <div className="py-2 flex flex-col">
+                      {[
+                        { name: 'Building', target: 'service-building' },
+                        { name: 'Road Works', target: 'service-road-works' },
+                        { name: 'Heavy Machinery', target: 'service-heavy-machinery' },
+                        { name: 'Renovation', target: 'service-renovation' }
+                      ].map((service) => (
+                        <button
+                          key={service.name}
+                          onClick={() => handleServiceClick(service.target)}
+                          className="px-4 py-2.5 text-left text-xs font-semibold tracking-wider text-gray-300 hover:text-gold hover:bg-white/5 transition-all duration-300 uppercase border-b border-white/5 last:border-0"
+                        >
+                          {service.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <button
@@ -140,6 +202,54 @@ export default function Navbar({ currentView, setView, activeSection, onOpenQuot
               link.isSection
                 ? currentView === 'home' && activeSection === link.target
                 : currentView === link.target;
+
+            if (link.name === 'Services') {
+              return (
+                <div key={link.name} className="flex flex-col border-b border-white/5">
+                  <button
+                    onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                    className={`text-left text-base font-semibold tracking-widest uppercase py-2.5 hover:text-gold transition-colors focus:outline-none flex items-center justify-between ${
+                      isLinkActive ? 'text-gold' : 'text-gray-300'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown size={18} className={`transition-transform duration-300 text-gray-400 ${isMobileServicesOpen ? 'rotate-180 text-gold' : ''}`} />
+                  </button>
+                  <div
+                    className={`transition-all duration-300 overflow-hidden flex flex-col pl-4 bg-white/2 ${
+                      isMobileServicesOpen ? 'max-h-60 opacity-100 py-1' : 'max-h-0 opacity-0 py-0'
+                    }`}
+                  >
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        handleNavClick(link);
+                      }}
+                      className="text-left text-xs font-bold tracking-widest uppercase py-2 text-gray-400 hover:text-gold focus:outline-none"
+                    >
+                      All Services
+                    </button>
+                    {[
+                      { name: 'Building', target: 'service-building' },
+                      { name: 'Road Works', target: 'service-road-works' },
+                      { name: 'Heavy Machinery', target: 'service-heavy-machinery' },
+                      { name: 'Renovation', target: 'service-renovation' }
+                    ].map((service) => (
+                      <button
+                        key={service.name}
+                        onClick={() => {
+                          setIsOpen(false);
+                          handleServiceClick(service.target);
+                        }}
+                        className="text-left text-xs font-semibold tracking-widest uppercase py-2 text-gray-300 hover:text-gold focus:outline-none"
+                      >
+                        {service.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <button

@@ -223,3 +223,12 @@ select option {
   background-color: #0a1928 !important;
   color: #ffffff !important;
 }
+
+/* Active Service Card Highlight Glow */
+.glass-card.active-service-card {
+  border-color: var(--gold) !important;
+  background: linear-gradient(135deg, rgba(230, 173, 25, 0.08) 0%, rgba(230, 173, 25, 0.02) 100%) !important;
+  box-shadow: 0 12px 40px rgba(230, 173, 25, 0.25) !important;
+  transform: translateY(-8px) scale(1.03) !important;
+}
+
