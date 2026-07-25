@@ -24,6 +24,8 @@ import {
 export default function Home({ onSelectProject, projects, onOpenQuote }) {
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState("");
   const [typingLength, setTypingLength] = useState(0);
 
   useEffect(() => {
@@ -104,9 +106,66 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
     return project.type.toUpperCase() === activeFilter.toUpperCase();
   });
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
-    setContactSubmitted(true);
+
+    setLoading(true);
+    setResult("Sending...");
+
+    const formData = new FormData();
+
+    formData.append(
+      "access_key",
+      "d4e37153-9e1f-4ece-a793-bd6330305c71"
+    );
+
+    formData.append("name", contactData.name);
+    formData.append("phone", contactData.phone);
+    formData.append("email", contactData.email);
+    formData.append("service", contactData.service);
+    formData.append("message", contactData.message);
+
+    formData.append(
+      "subject",
+      "New Contact Form Submission - Iron Core Builders"
+    );
+
+    formData.append(
+      "from_name",
+      "Iron Core Builders Website"
+    );
+
+    try {
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Success! Your message has been sent.");
+        setContactSubmitted(true);
+        setResult("Message Sent");
+
+        setContactData({
+          name: "",
+          phone: "",
+          email: "",
+          service: "Building Construction",
+          message: "",
+        });
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleContactReset = () => {
@@ -434,16 +493,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-4 items-center w-full sm:w-auto">
-                <button
-                  onClick={onOpenQuote}
-                  className="px-6 py-3.5 bg-gold hover:bg-gold-hover text-ink font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-colors duration-300 rounded-sm"
-                >
-                  Explore Training
-                  <ArrowRight size={14} />
-                </button>
-              </div>
+
             </div>
 
             {/* Right: Main Image & Stats Bar underneath */}
@@ -944,10 +994,20 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-gold text-ink hover:bg-gold-hover transition-colors font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm"
+                    disabled={loading}
+                    className="w-full py-3.5 bg-gold text-ink hover:bg-gold-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm"
                   >
-                    <Send size={14} />
-                    <span>Send Message</span>
+                    {loading ? (
+                      <>
+                        <span className="w-4 h-4 border-2 border-ink border-t-transparent rounded-full animate-spin"></span>
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send size={14} />
+                        <span>Send Message</span>
+                      </>
+                    )}
                   </button>
                 </form>
               ) : (

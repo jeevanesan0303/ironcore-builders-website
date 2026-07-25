@@ -173,12 +173,6 @@ export default function Navbar({ currentView, setView, activeSection, onOpenQuot
               <span>+94 77 234 6434</span>
             </a>
           </div>
-          <button
-            onClick={onOpenQuote}
-            className="px-5 py-2.5 border border-gold text-gold hover:bg-gold hover:text-ink font-bold text-xs uppercase tracking-wider transition-all duration-300 rounded-sm"
-          >
-            Get a Quote
-          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -278,15 +272,6 @@ export default function Navbar({ currentView, setView, activeSection, onOpenQuot
               <Phone size={14} className="text-gold" />
               <span>+94 77 234 6434</span>
             </a>
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                onOpenQuote();
-              }}
-              className="w-full py-3 bg-gold text-ink font-bold text-sm uppercase tracking-wider transition-all duration-300 text-center rounded-sm hover:bg-gold/90"
-            >
-              Get a Quote
-            </button>
           </div>
         </div>
       </div>
