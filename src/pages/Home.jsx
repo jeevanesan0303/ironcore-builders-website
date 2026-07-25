@@ -68,7 +68,6 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
   });
 
   const [jcbVideoOpen, setJcbVideoOpen] = useState(false);
-  const [jcbLightboxImage, setJcbLightboxImage] = useState(null);
   const jcbScrollRef = React.useRef(null);
 
   const scrollJcb = (direction) => {
@@ -601,10 +600,9 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
                 className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-2 scroll-smooth"
               >
                 {jcbHighlights.map((hl, idx) => (
-                  <button
+                  <div
                     key={idx}
-                    onClick={() => setJcbLightboxImage(`/images/indian-jcb/${hl.image}`)}
-                    className="snap-start shrink-0 w-[240px] border border-black/10 bg-white relative group overflow-hidden text-left focus:outline-none cursor-pointer"
+                    className="snap-start shrink-0 w-[240px] border border-black/10 bg-white relative group overflow-hidden text-left"
                   >
                     {/* Aspect Image */}
                     <div className="aspect-[4/3] w-full overflow-hidden">
@@ -618,7 +616,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
                     <div className="p-3.5 bg-white border-t border-black/5 text-xs text-ink font-semibold uppercase tracking-wider text-center group-hover:text-gold transition-colors">
                       {hl.title}
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -1055,26 +1053,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
         </div>
       )}
 
-      {/* JCB Image Lightbox Modal */}
-      {jcbLightboxImage && (
-        <div className="fixed inset-0 z-[130] bg-black/95 flex items-center justify-center p-4 animate-page-entrance">
-          <div className="absolute inset-0" onClick={() => setJcbLightboxImage(null)} />
-          <button
-            onClick={() => setJcbLightboxImage(null)}
-            className="absolute top-6 right-6 text-gray-400 hover:text-white p-2 transition-colors z-50 focus:outline-none cursor-pointer"
-            title="Close Lightbox"
-          >
-            <X size={28} />
-          </button>
-          <div className="relative max-w-5xl max-h-[85vh] w-full flex items-center justify-center z-10">
-            <img
-              src={jcbLightboxImage}
-              alt="JCB Training Highlight fullscreen"
-              className="max-w-full max-h-[85vh] object-contain border border-white/10 shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
