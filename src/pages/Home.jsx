@@ -630,7 +630,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
           {/* Header */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12 reveal">
             <div className="lg:col-span-6 text-left">
-              <span className="text-gold text-xs font-bold uppercase tracking-widest mb-3">Our Work</span>
+              <span className="text-gold text-xs font-bold uppercase tracking-widest mb-3">On Going Work</span>
               <h2 className="text-3xl sm:text-5xl font-extrabold uppercase leading-tight font-display tracking-tight text-white">
                 Project Details
               </h2>
