@@ -187,7 +187,7 @@ export default function Home({ onSelectProject, projects, onOpenQuote }) {
       >
         {/* Background & Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center filter brightness-[0.85] saturate-[0.9] scale-102 animate-hero-zoom" style={{ backgroundImage: "url('/images/hero-house-full.png')" }} />
+          <div className="absolute inset-0 bg-cover bg-center filter brightness-[0.85] saturate-[0.9] scale-102 animate-hero-zoom" style={{ backgroundImage: "url('/images/hero-construction.jpg')" }} />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/40 to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent z-10" />
         </div>
