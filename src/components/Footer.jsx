@@ -175,7 +175,7 @@ export default function Footer({ currentView, setView }) {
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-gray-500">
         <span>© 2026 Iron Core Builders (Pvt) Ltd. All rights reserved.</span>
         <div className="flex items-center gap-6">
-          <span>Built for strength. Designed for trust.</span>
+          <span>Built for strength. Designed for trust. Developed by <a href="https://www.xyphoraprime.com/" target="_blank" rel="noopener noreferrer" className='text-gold hover:underline transition-colors duration-200'>Xyphora Prime (Pvt) Ltd</a></span>
           <button
             onClick={scrollToTop}
             className="w-8 h-8 rounded-sm bg-white/5 hover:bg-gold hover:text-ink flex items-center justify-center text-gray-400 transition-all duration-300 border border-white/5"
